@@ -1,0 +1,9 @@
+Ask the user for a positive integer input
+If input is less than or equal to zero, then ask the user to correct their input
+If input is valid, then proceed
+If input is equal to one, then end program and print “One is not a prime number.”
+Else, continue the program
+If input % 2 = 0, then print the number is not prime.
+Create a loop with variable i starting from 3 to input - 1.
+If input % i = 0, then print the number is not prime,
+If the loop finishes, then print the number is prime.
