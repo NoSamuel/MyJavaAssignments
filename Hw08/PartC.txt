@@ -1,0 +1,8 @@
+1) run until n is greater than or equal to 13
+   output: 1 4 7 10
+2) add 3 to n before printing it
+   output: 4 7 10 13 (13 is included because the program stops after the number reaches 13)
+3) adds one to n every loop until n reaches 3 (smaller than 4)
+   output: 1 2 3
+4) 3) adds one to n every loop until n reaches 4
+   output: 1 2 3 4 
