@@ -1,7 +1,6 @@
 /*Sam Jin
 AT Java
  */
-//FIXING NEEDED
 import java.util.Scanner;
 public class PartB {
     public static void main(String[] args) {
