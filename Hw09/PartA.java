@@ -1,3 +1,6 @@
+/*Sam Jin
+ * AT Java
+ */
 import java.util.Scanner;
 public class PartA{
     public static void main(String[] args) {
