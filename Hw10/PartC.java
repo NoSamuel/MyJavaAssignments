@@ -1,24 +1,6 @@
 import java.util.Scanner;
 
-<<<<<<< HEAD
-public class PartC{
-    
-    public static double volume(double r)
-    {
-        double vol = 4.0/3.0 * Math.PI * r * r * r;
-        return vol;
-        
-    }
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter the radius of the sphere: (in meters)");
-        double r = in.nextDouble();
-        double volsphere = volume(r);
-        System.out.println("The Volume of the sphere is: " + volsphere + "m^3");
-    }
-    
-}
-=======
+
 public class PartC {
     public static void main(String[] args) throws Exception {
         // cookies are $0.99 apiece.
@@ -49,4 +31,4 @@ public class PartC {
     }
 }
 
->>>>>>> 91596794b6cea0236a91dab489d28bc7611b5927
+
