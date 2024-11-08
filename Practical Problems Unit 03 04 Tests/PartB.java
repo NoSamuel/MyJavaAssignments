@@ -1,3 +1,7 @@
+/*
+ * Sam Jin
+ * AT Java Unit 3&4 Test Part B
+ */
 import java.util.Scanner;
 
 public class PartB {
@@ -32,3 +36,4 @@ public class PartB {
         }
     }
 }
+//This program is tested by 123, 132, 213, 231, 321, 312
