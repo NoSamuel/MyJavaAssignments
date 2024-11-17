@@ -102,8 +102,8 @@ public class Cards{
         } else if (rank_constructor == 13){
             Rank = card_rank.KING;
         }
-
     }
+
     //Methods
     public card_suit getSuit(){
         return Suit;
@@ -160,7 +160,6 @@ public class Cards{
         } else {
             r = null;
         }
-
         return (s + r);
     }
 
@@ -194,4 +193,3 @@ public class Cards{
 
     }
 }
-
