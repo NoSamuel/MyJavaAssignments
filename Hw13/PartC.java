@@ -4,26 +4,18 @@ import javax.swing.*;
 
 public class PartC {
     public static void draw(Graphics drawing){
-        for (int n = 0; n <= 3; n = n + 1){
-            for (int i = 0; i <= 3; i = i + 1){
-                if (n % 2 == 0){
-                    if (i % 2 == 0){
-                    drawing.setColor(Color.BLUE);
-                    } else {
-                    drawing.setColor(Color.RED);
-                    }
-                } else {
-                    if (i % 2 == 0){
-                    drawing.setColor(Color.RED);
-                    } else {
-                    drawing.setColor(Color.BLUE);
-                    } 
-                    }
-                
-                drawing.fillRect(i * 100, n * 100, 100, 100);
-                
-            }
-            
+        double theta = 0;
+        double r;
+        double dtheta = 1.0 / 10000;
+        double x;
+        double y;
+        while (theta <= 2 * Math.PI){
+            drawing.setColor(Color.BLUE);
+            r = Math.cos(2 * theta);
+            x = r * 150 * Math.cos(theta);
+            y = r * 150 * Math.sin(theta);
+            theta = theta + dtheta;
+            drawing.fillRect((int)x + 200, 200 -(int)y, 1, 1);
         }
     }
 
@@ -93,7 +85,4 @@ public class PartC {
         System.out.println("Content Size : " + frame.getContentPane().getSize());
 
     }
-}
-
-
 }
