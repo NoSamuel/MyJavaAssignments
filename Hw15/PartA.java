@@ -30,7 +30,7 @@ public class PartA{
         //create a reversed array
         double[] reversedvalues = new double[count];
         for (int n = 0; n < count; n = n + 1){
-            reversedvalues[n] = values[n]
+            reversedvalues[n] = values[n];
         }
         Arrays.sort(reversedvalues, Collections.reverseOrder());
 
