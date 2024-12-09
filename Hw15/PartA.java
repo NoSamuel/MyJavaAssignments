@@ -27,12 +27,19 @@ public class PartA{
             System.out.print(values[i] + "*");
         }
 
+        System.out.println();
         //create a reversed array
         double[] reversedvalues = new double[count];
         for (int n = 0; n < count; n = n + 1){
             reversedvalues[n] = values[n];
         }
-        Arrays.sort(reversedvalues, Collections.reverseOrder());
+        Arrays.sort(reversedvalues);
+
+        
+        for (int n = 1; n < values.length; n = n + 1){
+            System.out.print(values[values.length - n]);
+            System.out.print(",");
+        }
 
 
 
