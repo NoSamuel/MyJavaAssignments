@@ -4,14 +4,14 @@ import java.util.Arrays;
 public class PartA{
     public static int find_lowest_score_position (double[] values){
         double smallest_value = values[0];
-        int i = 1;
-        for (i = 1; i < values.length; i++){
+        int index = 0;
+        for (int i = 1; i < values.length; i++){
             if (values[i] < smallest_value){
                 smallest_value = values[i];
-                break;
+                index = i;
             }
         }
-        return i;
+        return index;
     }
 
     public static void main(String[] args) {
@@ -28,6 +28,7 @@ public class PartA{
                 count = count + 1;
             }
         }   
+        int currentsize = count;
 
         System.out.println("Here are your scores:");
         for (int n = 0; n < count; n = n + 1){
@@ -36,7 +37,15 @@ public class PartA{
         
         System.out.print("Do you wish to drop the lowest score? (respond y to do so)");
         if (in.hasNext("y") || in.hasNext("Q")){
-            System.out.println(find_lowest_score_position(scores));
+            for (int i = find_lowest_score_position(scores) + 1; i < count; i++){
+                scores[find_lowest_score_position(scores) - 1] = scores[find_lowest_score_position(scores)]; 
+            }
+            currentsize = currentsize - 1;
+        }
+
+        System.out.println("Here are your updated scores:");
+        for (int pos = 0; pos < currentsize; pos = pos + 1){
+            System.out.println("Test score: " + scores[pos]);
         }
     }
 }
