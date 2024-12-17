@@ -16,6 +16,7 @@ public class PartB {
                 values.add(in.nextDouble());
             }
         }
+        
         for (int i = 0; i < values.size(); i++){
             System.out.println(values.get(i));
         }
