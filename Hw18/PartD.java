@@ -18,15 +18,23 @@ public class PartD {
             }
         }
 
-        int currentSize = values.size();
+        System.out.println("Before: " + values);
 
-        for (int i = 0; i < values.size(); i++){
-            if(values.get(0) % 2.0 != 0){
-                for (int n = 0; n < currentSize; n++){
-                    values.get(n - 1) = values.get(i);
-                }
+        int i = 0;
+        while (i < values.size()) {
+            int val = values.get(i);
+
+            // is it odd?
+            if (val % 2 != 0) {
+                // delete it.
+                values.remove(i);
+            } else {
+                // it's even.
+                i = i + 1;
             }
         }
-
+        System.out.println("after: " + values);
+        
+       
     }
 }
