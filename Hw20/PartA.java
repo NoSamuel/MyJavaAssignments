@@ -18,7 +18,7 @@ public class PartA {
         System.out.println("---------------------------------");
 
         //Set up delimiter
-        in.useDelimiter(",|\\s+|\\n");
+        in.useDelimiter("[,\s\n]+");
 
         //Print info
         while (in.hasNext()) {
