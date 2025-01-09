@@ -1,6 +1,10 @@
+/*
+ * AT Java
+ * Sam Jin
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PartA {
@@ -8,11 +12,20 @@ public class PartA {
         //open the file
         File inputFile = new File("customerdata.txt");
         Scanner in = new Scanner(inputFile);
-        int count = 0;
+
+        //print headers
+        System.out.printf("%-10s| %-15s| %-10s%n", "ID", "Name", "Balance");
+        System.out.println("---------------------------------");
+
+        //Set up delimiter
+        in.useDelimiter(",|\\s+|\\n");
+
+        //Print info
         while (in.hasNext()) {
-            String word = in.next();
-            System.out.println(word);
-            count++;
+            int id = in.nextInt();
+            String name = in.next();
+            double balence = in.nextDouble(); 
+            System.out.printf("%-10d | %-15s | %-10.2f%n", id, name, balence);
         }
         in.close();
     }

@@ -1,9 +1,12 @@
+/*
+ * AT Java
+ * Sam Jib
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.lang.reflect.Field;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class PartB {
     public static void main(String[] args) throws FileNotFoundException {
