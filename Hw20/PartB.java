@@ -18,15 +18,12 @@ public class PartB {
 
         while (in.hasNext()) {
             char c = in.next().charAt(0);
+            count = count + 1;
             System.out.print(c);
             if (Character.isDigit(c)) {
                 digits = digits + 1;
-                count = count + 1;
-            } else if (Character.isWhitespace(c)) {
-                count = count + 1;
             } else if (Character.isLetter(c)) {
                 letters = letters + 1;
-                count = count + 1;
             }
         }
 
