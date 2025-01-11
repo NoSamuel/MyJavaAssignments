@@ -1,3 +1,7 @@
+/*Sam Jin
+ * AT Java
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -27,7 +31,7 @@ public class PartA {
 
             System.out.printf("Ranked #%3d: %16s, %6.2f%%, %20s%n", ranking, country, percentage, region);
         }
-
+        in.close();
         System.out.println("-----------------------------------------------------------");
         
     }
