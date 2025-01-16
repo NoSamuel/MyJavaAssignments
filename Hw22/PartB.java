@@ -13,7 +13,7 @@ public class PartB {
         File inputFile = new File(file_name);
         Scanner in = new Scanner(inputFile);
         while (in.hasNext()) {
-            String name;
+            String name = ("");
             String yearborn_line;
             try {
                 String line = in.nextLine();
