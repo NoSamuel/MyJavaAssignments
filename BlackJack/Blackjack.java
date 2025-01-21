@@ -40,22 +40,31 @@ class Cards{
             card_value = 11;
         }else if (rankofcard == 2){
             Rank = card_rank.TWO;
+            card_value = 2;
         }else if (rankofcard == 3){
             Rank = card_rank.THREE;
+            card_value = 3;
         }else if (rankofcard == 4){
             Rank = card_rank.FOUR;
+            card_value = 4;
         }else if (rankofcard == 5){
             Rank = card_rank.FIVE;
+            card_value = 5;
         }else if (rankofcard == 6){
             Rank = card_rank.SIX;
+            card_value = 6;
         }else if (rankofcard == 7){
             Rank = card_rank.SEVEN;
+            card_value = 7;
         }else if (rankofcard == 8){
             Rank = card_rank.EIGHT;
+            card_value = 8;
         }else if (rankofcard == 9){
             Rank = card_rank.NINE;
+            card_value = 9;
         }else if (rankofcard == 10){
             Rank = card_rank.TEN;
+            card_value = 10;
         }else if (rankofcard == 11){
             Rank = card_rank.JACK;
             card_value = 10;
@@ -117,8 +126,12 @@ class Cards{
         return Suit;
     }
 
-    public card_rank getRank(){
+    public card_rank getRank() {
         return Rank;
+    }
+    
+    public int getValue() {
+        return card_value;
     }
 
     public String getFace(){
@@ -201,14 +214,17 @@ public class Blackjack{
             //deal and display one dealer card and two player cards
             Cards dealer_card1 = new Cards();
             Cards player_card1 = new Cards();
+            Cards player_card2 = new Cards();
             dealer.add(dealer_card1);
             player.add(player_card1);
+            player.add(player_card2);
             System.out.println("Dealer: " + dealer.get(0).getFace());
-            System.out.println("Player: ");
+            System.out.println("Player: " + player.get(0).getFace() + player.get(1).getFace());
             
             //record points
-            dealer_score = dealer_score + 
-            break;           
+            dealer_score = dealer_score + dealer_card1.getValue();
+            player_score = player_score + player_card1.getValue() + player_card2.getValue();
+            continue_ = false;
         }
 
     }
