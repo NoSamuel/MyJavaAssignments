@@ -1,0 +1,3 @@
+D) Instrument myInstrument
+
+The method tune is only for guitars, so not any instrument.
