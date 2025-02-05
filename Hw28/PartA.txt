@@ -1,0 +1,3 @@
+C) Reptile
+
+All the other options are of type Reptile.

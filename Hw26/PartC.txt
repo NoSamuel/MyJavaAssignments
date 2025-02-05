@@ -10,3 +10,8 @@ public class PartC{
    }
     
 }
+
+this program creates a new Customer named "Sal's Deli" (c1)
+adds $100 to "Sal's Deli"'s getSales
+created a copy of c1 named c2
+prints both sales (100)
