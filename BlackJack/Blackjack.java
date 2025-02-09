@@ -134,6 +134,7 @@ class Cards{
         return card_value;
     }
 
+
     public String getFace(){
         String s;
         String r;
@@ -183,8 +184,13 @@ class Cards{
         }
         return (s + r);
 }
+
+    
 }
 public class Blackjack{
+    public static void clearScreen(){
+        System.out.flush();
+    }
     public static void main(String[] args) {
     System.out.println("Welcome to the BlackJack table");
     Scanner game = new Scanner(System.in);
@@ -204,13 +210,13 @@ public class Blackjack{
         ArrayList<Cards> player = new ArrayList<Cards>();
 
         //initialize position in the arrays
-        int dealer_pos = 0;
+        int dealer_pos = 1;
         int player_pos = 1;
 
         //boolean variable to check if player wants to play another hand
         boolean continue_ = true;
 
-        while (continue_ == true){
+        while (continue_){
             //deal and display one dealer card and two player cards
             Cards dealer_card1 = new Cards();
             Cards player_card1 = new Cards();
@@ -218,16 +224,34 @@ public class Blackjack{
             dealer.add(dealer_card1);
             player.add(player_card1);
             player.add(player_card2);
-            System.out.println("Dealer: " + dealer.get(0).getFace());
+            System.out.println("Dealer: " + dealer.get(0).getFace() + "??");
             System.out.println("Player: " + player.get(0).getFace() + player.get(1).getFace());
             
             //record points
             dealer_score = dealer_score + dealer_card1.getValue();
             player_score = player_score + player_card1.getValue() + player_card2.getValue();
-            continue_ = false;
+            System.out.println("Your score: " + player_score);
+            
+            //ask the player for their next move
+            while (player_score < 21){
+                System.out.print("Enter H to hit or S to stand");
+                if (game.hasNext("H") || game.hasNext("h")){
+                    game.next();
+                    player.add(player_pos, new Cards());
+                    player_score = player_score + player.get(player_pos).getValue();
+                    player_pos++;
+                } else if (game.hasNext("S") || game.hasNext("s")){
+                    game.next();
+                    dealer.add(dealer_pos, new Cards());
+                    dealer_score = dealer_score + dealer.get(dealer_pos).getValue();
+                    clearScreen();
+                    System.out.println("Dealer: " + dealer.get(0).getFace() + dealer.get(dealer_pos).getValue());
+                    System.out.println("Player: " + player.get(0).getFace() + player.get(1).getFace());
+                }
+            }
+            
         }
-
     }
-
 }
+
 }
