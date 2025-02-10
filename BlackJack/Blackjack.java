@@ -183,14 +183,48 @@ class Cards{
             r = null;
         }
         return (s + r);
-}
-
-    
+} 
 }
 public class Blackjack{
-    public static void clearScreen(){
+    public static void clearScreen() {
         System.out.flush();
     }
+    
+    //methods to count the total points in a hand
+    public static int countDealer(ArrayList<Cards> Dealer) {
+        int DealerScore = 0;
+        for (int i = 0; i < Dealer.size(); i++) {
+            DealerScore = DealerScore + Dealer.get(i).getValue();
+        }
+
+        return DealerScore;
+    }
+
+    public static int countPlayer(ArrayList<Cards> Player) {
+        int PlayerScore = 0;
+        for (int i = 0; i < Player.size(); i++) {
+            PlayerScore = PlayerScore + Player.get(i).getValue();
+        }
+
+        return PlayerScore;
+    }
+    
+
+    //Methods to dislay the cards
+    public static void displayPlayer(ArrayList<Cards> Player) {
+        System.out.print("Player: ");
+        for (int i = 0; i < Player.size(); i++) {
+            System.out.print(Player.get(i).getFace());
+        }
+    }
+
+    public static void displayDealer(ArrayList<Cards> Dealer) {
+        System.out.print("Dealer: " );
+        for (int i = 0; i < Dealer.size(); i++) {
+            System.out.print(Dealer.get(i).getFace());
+        }
+    }
+
     public static void main(String[] args) {
     System.out.println("Welcome to the BlackJack table");
     Scanner game = new Scanner(System.in);
@@ -213,45 +247,94 @@ public class Blackjack{
         int dealer_pos = 1;
         int player_pos = 1;
 
+        //deal and display one dealer card and two player cards
+        dealer.add(new Cards());
+        dealer.add(new Cards());
+        player.add(new Cards());
+        player.add(new Cards());
+            
+
+        //display the hands and points
+        System.out.println("Dealer:" + dealer.get(0).getFace() + "??");
+        displayPlayer(player);
+        
+        dealer_score = dealer_score + countDealer(dealer);
+        player_score = player_score + countPlayer(player);
+
+        System.out.println("");
+        System.out.println("Player Score: " + player_score);
+
+        //check for 21s
+        if (player_score == 21 && dealer_score != 21) {
+            clearScreen();
+            System.out.print("BLACKJACK: Player Wins!");
+            return;
+        }
+
+        if (player_score == 21 && dealer_score == 21) {
+            clearScreen();
+            System.out.print("PUSH: The game is tied");
+            return;
+            
+        }
+
+        if (player_score != 21 && dealer_score == 21) {
+            clearScreen();
+            System.out.print("BLACKJACK: Dealer Wins!");
+            return;
+        }
+        
+
         //boolean variable to check if player wants to play another hand
         boolean continue_ = true;
 
-        while (continue_){
-            //deal and display one dealer card and two player cards
-            Cards dealer_card1 = new Cards();
-            Cards player_card1 = new Cards();
-            Cards player_card2 = new Cards();
-            dealer.add(dealer_card1);
-            player.add(player_card1);
-            player.add(player_card2);
-            System.out.println("Dealer: " + dealer.get(0).getFace() + "??");
-            System.out.println("Player: " + player.get(0).getFace() + player.get(1).getFace());
-            
-            //record points
-            dealer_score = dealer_score + dealer_card1.getValue();
-            player_score = player_score + player_card1.getValue() + player_card2.getValue();
-            System.out.println("Your score: " + player_score);
-            
-            //ask the player for their next move
-            while (player_score < 21){
-                System.out.print("Enter H to hit or S to stand");
-                if (game.hasNext("H") || game.hasNext("h")){
-                    game.next();
-                    player.add(player_pos, new Cards());
-                    player_score = player_score + player.get(player_pos).getValue();
-                    player_pos++;
-                } else if (game.hasNext("S") || game.hasNext("s")){
-                    game.next();
-                    dealer.add(dealer_pos, new Cards());
-                    dealer_score = dealer_score + dealer.get(dealer_pos).getValue();
-                    clearScreen();
-                    System.out.println("Dealer: " + dealer.get(0).getFace() + dealer.get(dealer_pos).getValue());
-                    System.out.println("Player: " + player.get(0).getFace() + player.get(1).getFace());
+        while (true) {
+            System.out.println("Enter H to hit or S to stand");
+            String input = game.nextLine().toLowerCase();
+            if (input.equals("h")) {
+                game.next();
+                player.add(new Cards());
+                player_score = countPlayer(player);
+                clearScreen();
+                System.out.println("Dealer: " + dealer.get(0).getFace() + "??");
+                displayPlayer(player);
+                System.out.println();
+                player_score = countPlayer(player);
+                System.out.println("Player Score: " + player_score);
+                if (player_score == 21 && dealer_score != 21) {
+                    System.out.print("BLACKJACK: Player Wins!");
+                    break;
                 }
+                if (player_score == 21 && dealer_score == 21) {
+                    System.out.print("PUSH: The game is tied");
+                    break;
+                }
+                if (player_score != 21 && dealer_score == 21) {
+                    System.out.print("BLACKJACK: Dealer Wins!");
+                    break;
+                }
+                if (player_score > 21) {
+                    System.out.print("BUST: Dealer Wins!");
+                    break;
+                }
+            } else if (input.equals("s")) {
+                game.next();
+                break;
             }
-            
         }
-    }
-}
+        
+        while (true) {
+            if (dealer_score > 16) {
+                break;
+            } else if (dealer_score < 17) {
+                dealer.add(new Cards());
+            }
+        }
 
+        clearScreen();
+        displayDealer(dealer);
+        displayPlayer(player);
+
+        }   
+        }
 }
