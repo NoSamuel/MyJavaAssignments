@@ -187,6 +187,7 @@ class Cards{
 }
 public class Blackjack{
     public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
         System.out.flush();
     }
     
@@ -234,6 +235,7 @@ public class Blackjack{
         System.out.println("You are no longer welcomed to the Blackjack table because you hate gambling... womp womp");
     } else {
         System.out.println("Sweet, let's get started");
+        clearScreen();
 
         //initialize dealer and player card points
         int dealer_score = 0;
