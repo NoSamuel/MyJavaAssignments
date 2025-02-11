@@ -230,7 +230,8 @@ public class Blackjack{
     System.out.println("Welcome to the BlackJack table");
     Scanner game = new Scanner(System.in);
     System.out.println("I would like to gamble, affirm? (enter q to quit or other key to continue)");
-    if (game.hasNext("q")){
+    String responce = game.nextLine().toLowerCase();
+    if (responce == "q"){
         System.out.println("You don't want to gamble? What a shame. It's the fastest way to generational wealth pluh");
         System.out.println("You are no longer welcomed to the Blackjack table because you hate gambling... womp womp");
     } else {
@@ -250,12 +251,11 @@ public class Blackjack{
         dealer.add(new Cards());
         player.add(new Cards());
         player.add(new Cards());
-            
 
         //display the hands and points
         System.out.println("Dealer:" + dealer.get(0).getFace() + " ??");
         displayPlayer(player);
-        
+
         dealer_score = dealer_score + countDealer(dealer);
         player_score = player_score + countPlayer(player);
 
@@ -273,7 +273,7 @@ public class Blackjack{
             clearScreen();
             System.out.print("PUSH: The game is tied");
             return;
-            
+
         }
 
         if (player_score != 21 && dealer_score == 21) {
@@ -282,11 +282,11 @@ public class Blackjack{
             return;
         }
 
+        //ask the player to decide to hit or stand
         while (true) {
             System.out.println("Enter H to hit or S to stand");
             String input = game.nextLine().toLowerCase();
             if (input.equals("h")) {
-                game.next();
                 player.add(new Cards());
                 player_score = countPlayer(player);
                 clearScreen();
@@ -312,23 +312,74 @@ public class Blackjack{
                     break;
                 }
             } else if (input.equals("s")) {
-                game.next();
+                //game.next();
+                clearScreen();
+                displayDealer(dealer);
+                System.out.println();
+                displayPlayer(player);
+                System.out.println("Player Score: " + player_score);
                 break;
             }
         }
-        
+
+        //Once the player turn if over, check if dealer has above 16 points
         while (true) {
-            if (dealer_score > 16) {
-                break;
-            } else if (dealer_score < 17) {
+            if (dealer_score < 17) {
                 dealer.add(new Cards());
+            } else if (dealer_score > 16) {
+                dealer_score = countDealer(dealer);
+                break;
             }
+            break;
         }
 
         clearScreen();
         displayDealer(dealer);
+        System.out.println("");
         displayPlayer(player);
+        System.out.println("");
+        System.out.println("Dealer: " + countDealer(dealer));
+        System.out.println("Player: " + countPlayer(player));
 
-        }   
+        if (player_score > 21) {
+            System.out.print("BUST: Dealer Wins!");
+            return;
         }
+
+        if (dealer_score > 21) {
+            System.out.print("BUST: Player Wins!");
+            return;
+        }
+
+        if (player_score == 21 && dealer_score != 21) {
+            System.out.print("BLACKJACK: Player Wins!");
+            return;
+        }
+
+        if (player_score == 21 && dealer_score == 21) {
+            System.out.print("PUSH: The game is tied");
+            return;
+
+        }
+
+        if (player_score != 21 && dealer_score == 21) {
+            System.out.print("BLACKJACK: Dealer Wins!");
+            return;
+        }
+
+        if (player_score == dealer_score && player_score < 22) {
+            System.out.print("TIE: Game Tied");
+            return;
+        }
+
+        if (player_score > dealer_score && player_score < 22) {
+            System.out.print("WIN: Player Wins!");
+            return;
+        }else if (player_score < dealer_score && dealer_score < 22){
+            System.out.print("WIN: Dealer Wins!");
+            return;
+        }
+        
+    }
+    }
 }
