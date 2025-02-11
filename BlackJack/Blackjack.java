@@ -215,14 +215,14 @@ public class Blackjack{
     public static void displayPlayer(ArrayList<Cards> Player) {
         System.out.print("Player: ");
         for (int i = 0; i < Player.size(); i++) {
-            System.out.print(Player.get(i).getFace());
+            System.out.print(Player.get(i).getFace() + " ");
         }
     }
 
     public static void displayDealer(ArrayList<Cards> Dealer) {
         System.out.print("Dealer: " );
         for (int i = 0; i < Dealer.size(); i++) {
-            System.out.print(Dealer.get(i).getFace());
+            System.out.print(Dealer.get(i).getFace() + " ");
         }
     }
 
@@ -245,11 +245,7 @@ public class Blackjack{
         ArrayList<Cards> dealer = new ArrayList<Cards>();
         ArrayList<Cards> player = new ArrayList<Cards>();
 
-        //initialize position in the arrays
-        int dealer_pos = 1;
-        int player_pos = 1;
-
-        //deal and display one dealer card and two player cards
+        //deal each two cards
         dealer.add(new Cards());
         dealer.add(new Cards());
         player.add(new Cards());
@@ -257,7 +253,7 @@ public class Blackjack{
             
 
         //display the hands and points
-        System.out.println("Dealer:" + dealer.get(0).getFace() + "??");
+        System.out.println("Dealer:" + dealer.get(0).getFace() + " ??");
         displayPlayer(player);
         
         dealer_score = dealer_score + countDealer(dealer);
@@ -285,10 +281,6 @@ public class Blackjack{
             System.out.print("BLACKJACK: Dealer Wins!");
             return;
         }
-        
-
-        //boolean variable to check if player wants to play another hand
-        boolean continue_ = true;
 
         while (true) {
             System.out.println("Enter H to hit or S to stand");
