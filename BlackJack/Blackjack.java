@@ -242,7 +242,7 @@ public class Blackjack{
     clearScreen();
     System.out.println("Welcome to the BlackJack table");
     Scanner game = new Scanner(System.in);
-    System.out.println("I NEED to gamble, affirm? (enter q to quit or other key to continue)");
+    System.out.println("I NEED to gamble, affirm? (enter any key to continue)");
     String responce = game.nextLine().toLowerCase();
     if (responce == "q"){
         System.out.println("You don't want to gamble? What a shame. It's the fastest way to generational wealth pluh");
