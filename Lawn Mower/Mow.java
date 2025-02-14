@@ -1,5 +1,4 @@
 class Yard {
-    
     private int length;
     private int width;
     //Constructor
