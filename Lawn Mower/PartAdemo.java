@@ -14,7 +14,8 @@ public class PartAdemo {
         System.out.println("Please enter the number of columns in the yard (without walls): ");
         int colnumnum = in.nextInt();
 
-        //initialize yard
+        //initialize and print yard
+        clearScreen();
         Yard yard = new Yard (rownum, colnumnum);
         yard.printYard(yard);
     }
