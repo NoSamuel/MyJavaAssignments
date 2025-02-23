@@ -2,46 +2,46 @@ package mow;
 
 public class Yard {
     //Initialize variables and 2D array
-    private int height;
-    private int width;
+    private int row;
+    private int column;
     private char[][] yard;
-    int wall_height;
-    int wall_width;
+    int wall_row;
+    int wall_column;
 
     //Constructor
-    public Yard(int height, int width) {
+    public Yard(int row, int column) {
 
         //grass covered part of the lawn
-        this.height = height;
-        this.width = width;
+        this.row = row;
+        this.column = column;
 
-        //calculate the height and width of lawn with wall included
-        wall_height = height + 2;
-        wall_width = height + 2;
+        //calculate the row and column of lawn with wall included
+        wall_row = row + 2;
+        wall_column =  column + 2;
 
         //initialize the array to draw the yard
-        yard = new char[wall_height][wall_width];
+        yard = new char[wall_row][wall_column];
 
 
         //draw the top wall
-        for (int i = 0; i < wall_width; i++){
+        for (int i = 0; i < wall_column; i++){
             yard [0][i] = 'R';
         }
 
         //draw the middle for portion with wall and grass
-        for (int row = 1; row < height; row++) {
-            for (int col = 0; col < width; col++) {
-                if (col == 0 || col == wall_width - 1){
-                    yard [row][col] = 'R';
+        for (int i = 1; i < yard.length; i++){
+            for (int j = 0; j < yard[0].length; j++){
+                if (j == 0 || j == wall_column - 1){ 
+                    yard[i][j] = 'R';
                 } else {
-                    yard [row][col] = '+';
+                    yard[i][j] = '+';
                 }
             }
         }
 
         //draw the bottom wall
-        for (int i = 0; i < wall_width; i++){
-            yard [wall_height-1][i] = 'R';
+        for (int i = 0; i < wall_column-1; i++){
+            yard [wall_row-1][i] = 'R';
         }
     }
 
@@ -55,20 +55,20 @@ public class Yard {
         yard [x-1][y-1] = input;
     }
 
-    //method to return the height of the yard
-    public int getHeight (Yard yard) {
-        return height;
+    //method to return the row of the yard
+    public int getrow (Yard yard) {
+        return row;
     }
 
-    //method to return the width of the yard
-    public int getWidth (Yard yard) {
-        return width;
+    //method to return the column of the yard
+    public int getcolumn (Yard yard) {
+        return column;
     }
 
     //method to print the yard
     public void printYard (Yard yard) {
-        for (int i = 0; i < wall_height; i++) {
-            for (int j = 0; j < wall_width; j++) {
+        for (int i = 0; i < wall_row; i++) {
+            for (int j = 0; j < wall_column; j++) {
 	            System.out.print(this.yard [i][j]);
             }
             System.out.println("");
