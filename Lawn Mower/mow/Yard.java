@@ -40,7 +40,7 @@ public class Yard {
         }
 
         //draw the bottom wall
-        for (int i = 0; i < wall_column-1; i++){
+        for (int i = 0; i < wall_column - 1; i++){
             yard [wall_row-1][i] = 'R';
         }
     }
