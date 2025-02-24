@@ -5,8 +5,8 @@ public class Yard {
     private int row;
     private int column;
     private char[][] yard;
-    int wall_row;
-    int wall_column;
+    private int wall_row;
+    private int wall_column;
 
     //Constructor
     public Yard(int row, int column) {
@@ -46,30 +46,52 @@ public class Yard {
     }
 
     //method to return the value of the character in a certain position
-    public void getValue (int x, int y){
-        System.out.print(yard[x-1][y-1]);
+    public char getValue (int x, int y){
+        return yard[x-1][y];
     }
 
     //method to override the value of a given position
     public void override (int x, int y, char input) {
-        yard [x-1][y-1] = input;
+        yard [x][y] = input;
     }
 
     //method to return the row of the yard
     public int getrow (Yard yard) {
-        return row;
+        return wall_row;
     }
 
     //method to return the column of the yard
     public int getcolumn (Yard yard) {
-        return column;
+        return wall_column;
     }
 
     //method to print the yard
-    public void printYard (Yard yard) {
+    public void printYard(Yard yard) {
         for (int i = 0; i < wall_row; i++) {
             for (int j = 0; j < wall_column; j++) {
-	            System.out.print(this.yard [i][j]);
+                System.out.print(this.yard[i][j]);
+            }
+            System.out.println("");
+        }
+    }
+    
+    //method to print the yard with the mower
+    public void printMower(Mower mower) {
+        for (int i = 0; i < wall_row; i++) {
+            for (int j = 0; j < wall_column; j++) {
+                if (i == mower.getRow() && j == mower.getcolumn()) {
+                    if (mower.getDirection() == 0) {
+                        System.out.print("↑");
+                    } else if (mower.getDirection() == 1) {
+                        System.out.print("→");
+                    } else if (mower.getDirection() == 2) {
+                        System.out.print("↓");
+                    } else if (mower.getDirection() == 3) {
+                        System.out.print("←");
+                    }
+                } else {
+                    System.out.print(this.yard[i][j]);
+                }
             }
             System.out.println("");
         }
