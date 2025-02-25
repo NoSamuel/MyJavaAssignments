@@ -168,13 +168,13 @@ public class Mower {
             column_mower = 1;
         } else if (corner_pos == 1) {
             row_mower = 1;
-            column_mower = yard.getcolumn(yard) - 1;
+            column_mower = yard.getcolumn(yard) - 2;
         } else if (corner_pos == 2) {
-            row_mower = yard.getrow(yard) - 1;
+            row_mower = yard.getrow(yard) - 2;
             column_mower = 1;
         } else if (corner_pos == 3) {
-            row_mower = yard.getrow(yard) - 1;
-            column_mower = yard.getcolumn(yard) - 1;
+            row_mower = yard.getrow(yard) - 2;
+            column_mower = yard.getcolumn(yard) - 2;
         }
         int random_direction = generator.nextInt(0, 4);
         //0 = up
@@ -226,10 +226,11 @@ public class Mower {
                         moveForward();
                     }
                     //if the mover is left of the grass
-                    while (column_mower > j){
+                    while (column_mower > j) {
                         direction = 3;
                         moveForward();
                     }
+                    return true;
                 }
             }
         }

@@ -47,7 +47,7 @@ public class Yard {
 
     //method to return the value of the character in a certain position
     public char getValue (int x, int y){
-        return yard[x-1][y];
+        return yard[x][y];
     }
 
     //method to override the value of a given position
@@ -57,12 +57,12 @@ public class Yard {
 
     //method to return the row of the yard
     public int getrow (Yard yard) {
-        return wall_row;
+        return row;
     }
 
     //method to return the column of the yard
     public int getcolumn (Yard yard) {
-        return wall_column;
+        return column;
     }
 
     //method to print the yard

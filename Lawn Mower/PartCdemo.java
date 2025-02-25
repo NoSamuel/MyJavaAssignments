@@ -32,13 +32,16 @@ public class PartCdemo {
         //randomize mower
         mower.randomizePosition(yard);
 
-        //start to cut
+        //Start to cut
         while (true) {
-            if (mower.detectGrass(yard) == true) {
+            if (mower.checkGrass(yard) == true) {
                 mower.updateMower(yard);
+                mower.cutGrass(yard);
                 yard.printMower(mower);
                 delay(700);
                 clearScreen();
+            } else {
+                break;
             }
         }
     }
