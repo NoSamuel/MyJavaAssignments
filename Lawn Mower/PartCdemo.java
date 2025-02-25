@@ -31,18 +31,97 @@ public class PartCdemo {
 
         //randomize mower
         mower.randomizePosition(yard);
+        
+        //cut the corner it's placed
+        mower.cutGrass(yard);
 
-        //Start to cut
+        //forever loop to cut
+
         while (true) {
-            if (mower.checkGrass(yard) == true) {
-                mower.updateMower(yard);
+            if (mower.senseValue(yard) == '+') {
                 mower.cutGrass(yard);
                 yard.printMower(mower);
+                mower.moveForward();
                 delay(700);
                 clearScreen();
+                continue;
             } else {
-                break;
+                mower.turnRight();
+                if (mower.senseValue(yard) == '+') {
+                    mower.cutGrass(yard);
+                    yard.printMower(mower);
+                    mower.moveForward();
+                    delay(700);
+                    clearScreen();
+                    continue;
+                } else {
+                    mower.turnRight();
+                    if (mower.senseValue(yard) == '+') {
+                        mower.cutGrass(yard);
+                        yard.printMower(mower);
+                        mower.moveForward();
+                        delay(700);
+                        clearScreen();
+                        continue;
+                    } else {
+                        mower.turnRight();
+                        if (mower.senseValue(yard) == '+') {
+                            mower.cutGrass(yard);
+                            yard.printMower(mower);
+                            mower.moveForward();
+                            delay(700);
+                            clearScreen();
+                            continue;
+                        } else {
+                            break;
+                        }
+                    }
+                }
             }
         }
+
+        while (true) {
+            if (mower.senseValue(yard) == '+') {
+                mower.cutGrass(yard);
+                yard.printMower(mower);
+                mower.moveForward();
+                delay(700);
+                clearScreen();
+                continue;
+            } else {
+                mower.turnRight();
+                if (mower.senseValue(yard) == '+') {
+                    mower.cutGrass(yard);
+                    yard.printMower(mower);
+                    mower.moveForward();
+                    delay(700);
+                    clearScreen();
+                    continue;
+                } else {
+                    mower.turnRight();
+                    if (mower.senseValue(yard) == '+') {
+                        mower.cutGrass(yard);
+                        yard.printMower(mower);
+                        mower.moveForward();
+                        delay(700);
+                        clearScreen();
+                        continue;
+                    } else {
+                        mower.turnRight();
+                        if (mower.senseValue(yard) == '+') {
+                            mower.cutGrass(yard);
+                            yard.printMower(mower);
+                            mower.moveForward();
+                            delay(700);
+                            clearScreen();
+                            continue;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        yard.printMower(mower);
     }
 }

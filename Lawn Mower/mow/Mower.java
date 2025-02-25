@@ -52,13 +52,13 @@ public class Mower {
     
     //methods to allow the mower to move forward based on its current direction
     public void moveForward() {
-        if (direction == 0) {
+        if (direction == 0) { //move up
             row_mower = row_mower - 1;
-        } else if (direction == 1) {
+        } else if (direction == 1) { //move right
             column_mower = column_mower + 1;
-        } else if (direction == 2) {
+        } else if (direction == 2) { //move down
             row_mower = row_mower + 1;
-        } else if (direction == 3) {
+        } else if (direction == 3) { //move left
             column_mower = column_mower - 1;
         }
     }
@@ -129,7 +129,7 @@ public class Mower {
         } else if (direction == 1) {
             if (yard.getValue(row_mower, column_mower + 1) == '+') {
                 return '+';
-            } else if (yard.getValue(row_mower, column_mower + 1) == '+') {
+            } else if (yard.getValue(row_mower, column_mower + 1) == 'R') {
                 return 'R';
             } else {
                 return ' ';
@@ -210,23 +210,23 @@ public class Mower {
             for (int j = 0; j < yard.getcolumn(yard); j++) {
                 if (yard.getValue(i, j) == '+') {
                     //four while loops to align the mower with the grass
-                    //if the mower is above the grass
-                    while (row_mower > i){
-                        direction = 2;
-                        moveForward();
-                    }
                     //if the mower is under the grass
-                    while (row_mower < i){
+                    while (row_mower > j){
                         direction = 0;
                         moveForward();
                     }
-                    //if the mower is right of the grass
-                    while (column_mower < j){
+                    //if the mower is above the grass
+                    while (row_mower < j){
+                        direction = 2;
+                        moveForward();
+                    }
+                    //if the mower is left of the grass
+                    while (column_mower < i){
                         direction = 1;
                         moveForward();
                     }
-                    //if the mover is left of the grass
-                    while (column_mower > j) {
+                    //if the mover is right of the grass
+                    while (column_mower > i) {
                         direction = 3;
                         moveForward();
                     }

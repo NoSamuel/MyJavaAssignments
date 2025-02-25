@@ -57,12 +57,12 @@ public class Yard {
 
     //method to return the row of the yard
     public int getrow (Yard yard) {
-        return row;
+        return wall_row;
     }
 
     //method to return the column of the yard
     public int getcolumn (Yard yard) {
-        return column;
+        return wall_column;
     }
 
     //method to print the yard
