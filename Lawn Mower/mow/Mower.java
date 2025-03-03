@@ -176,7 +176,7 @@ public class Mower {
             row_mower = yard.getrow(yard) - 2;
             column_mower = yard.getcolumn(yard) - 2;
         }
-        int random_direction = generator.nextInt(0, 4);
+        int random_direction = generator.nextInt(0,4);
         //0 = up
         //1 = right
         //2 = down
