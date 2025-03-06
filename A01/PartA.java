@@ -1,9 +1,11 @@
-import Animate.Board;
-
 import Animate.*;
+import java.awt.EventQueue;
 
 public class PartA {
     public static void main(String[] args) {
-        Board board = new Board();
+        EventQueue.invokeLater(() -> {
+            Application myApp = new Application("Title");
+            myApp.setVisible(true);
+        });
     }
 }

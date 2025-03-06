@@ -8,10 +8,11 @@ import java.awt.Rectangle;
 import java.awt.JobAttributes.SidesType;
 import java.awt.geom.AffineTransform;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 
 public class Board extends JPanel {
-    private final int B_WIDTH = 0;
-    private final int B_HEIGHT = 0;
+    private final int B_WIDTH = 400;
+    private final int B_HEIGHT = 400;
     
     //constructor
     public Board() {
@@ -36,12 +37,13 @@ public class Board extends JPanel {
        y_t = y_t - SIDE_LEN / 2;
        AffineTransform transform = new AffineTransform();
        transform.translate(x_t, y_t);
+       transform.rotate(Math.toRadians(22.5), x_t, y_t);
 
        //draw out the shape
        Rectangle rect = new Rectangle(0, 0, SIDE_LEN, SIDE_LEN);
        Shape transofromedSquare = transform.createTransformedShape(rect);
+       g2d.setColor(Color.MAGENTA);
+       g2d.fill(transofromedSquare);
+       g2d.drawString("I love the Derryfield School!", 20, 20);
    }
-   
-    
-    
 }

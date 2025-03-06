@@ -3,8 +3,8 @@ package Animate;
 import javax.swing.JFrame;
 
 public class Application extends JFrame {
-    private final int FRAME_WIDTH = 640;
-    private final int FRAME_HEIGHT = 480;
+    private final int FRAME_WIDTH = 1920;
+    private final int FRAME_HEIGHT = 1080;
 
     /*
      * Constructor.
