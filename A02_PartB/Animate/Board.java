@@ -25,16 +25,29 @@ public class Board extends JPanel {
     private final int INITIAL_DELAY = 25;
     private final int PERIOD_INTERVAL = 25;
     private int xSpeed = 2;
+    private int ySpeed = 2;
+    private int angle = 0;
 
     private class ScheduledUpdate extends TimerTask {
        /*
         * Override the run() method.
         * Update the position of our ball here.
         */
+
+        //make sure that the image does not travel out of bonds
         public void run() {
             x += xSpeed;
+            y += ySpeed;
+            angle += 3;
+
             if (x > B_WIDTH) {
                x = 0;
+               y = 0;
+            }
+
+            //reset angle
+            if (angle > 360){
+                angle = 0;
             }
             repaint();
         }
@@ -71,17 +84,10 @@ public class Board extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         
         AffineTransform affineTransform = new AffineTransform();
-        int x_t = 0, y_t = 0;
-        int x_scaled = 0, y_scaled = 0;
-        double scale = 0.5;
+    
         if (img != null) {
-            x_t = this.getWidth() / 2;
-            x_scaled = (int) ((img.getWidth() * scale) / 2.0);
-            y_t = this.getHeight() / 2;
-            y_scaled = (int) ((img.getHeight() * scale) / 2.0);
             affineTransform.translate(x,y);
-            affineTransform.rotate(Math.toRadians(45), x, y);
-            //affineTransform.scale(scale, scale);
+            affineTransform.rotate(Math.toRadians(angle), img.getWidth() / 2, img.getHeight() / 2);
             g2d.drawImage(img, affineTransform, null);
         } else {
             g2d.setColor(Color.BLUE);

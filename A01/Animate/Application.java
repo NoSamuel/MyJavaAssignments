@@ -2,19 +2,17 @@ package Animate;
 
 import javax.swing.JFrame;
 
-public class Application extends JFrame {
-    private final int FRAME_WIDTH = 1920;
-    private final int FRAME_HEIGHT = 1080;
+public class Application extends JFrame{
+    private final int FRAME_WIDTH = 640;
+    private final int FRAME_HEIGHT = 480;
 
-    /*
-     * Constructor.
-     */
-    public Application(String title) {
-        // the values for border width and title bar height
-        // depend on the operating system.
-        int border_width = 0;
+    //constructor
+    public Application (String title){
+        int boarder_width = 0;
         int bar_height = 0;
         OS os = checkOS();
+        switch (os){
+            OS os = checkOS();
         switch (os) {
             case WIN:
                 border_width = 7;
@@ -34,14 +32,9 @@ public class Application extends JFrame {
         // int application_width = FRAME_WIDTH + 2 * border_width;
         // int application_height = FRAME_HEIGHT + bar_height + border_width;
         this.setTitle(title);
-        Board board = new Board();
-        this.add(board);
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        int application_height = (int) board.getPreferredSize().getHeight() + bar_height + border_width;
-        int application_width = (int) board.getPreferredSize().getWidth() + 2 * border_width;
-        this.setSize(application_width, application_height);
     }
 
     public static enum OS {
@@ -62,5 +55,5 @@ public class Application extends JFrame {
         }
         return val;
     }
+    }
 }
-
