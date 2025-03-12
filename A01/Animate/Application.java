@@ -31,8 +31,11 @@ public class Application extends JFrame {
                 break;
         }
 
-        int application_width = FRAME_WIDTH + 2 * border_width;
-        int application_height = FRAME_HEIGHT + bar_height + border_width;
+        Board board = new Board();
+        this.add(board);
+
+        int application_width = (int)board.getPreferredSize().getWidth() + 2 * border_width;
+        int application_height = (int)board.getPreferredSize().getHeight() + bar_height + border_width;
         this.setTitle(title);
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

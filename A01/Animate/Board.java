@@ -10,8 +10,8 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 
 public class Board extends JPanel {
-    private final int B_WIDTH = 400;
-    private final int B_HEIGHT = 400;
+    private final int B_WIDTH = 500;
+    private final int B_HEIGHT = 500;
     
     //constructor
     public Board() {
@@ -41,8 +41,8 @@ public class Board extends JPanel {
        transform.rotate(Math.toRadians(22.5), x_t, y_t);
 
        //draw out the shape
-       Shape transofromedSquare = transform.createTransformedShape(rect);
-       g2d.fill(transofromedSquare);
+       Shape transoformedSquare = transform.createTransformedShape(rect);
+       g2d.fill(transoformedSquare);
        g2d.drawString("I love the Derryfield School!", 20, 20);
    }
 }
