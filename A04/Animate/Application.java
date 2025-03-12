@@ -12,8 +12,8 @@ public class Application extends JFrame {
     public Application(String title) {
         // the values for border width and title bar height
         // depend on the operating system.
-        int border_width = 400;
-        int bar_height = 400;
+        int border_width = 0;
+        int bar_height = 0;
         OS os = checkOS();
         switch (os) {
             case WIN:
@@ -31,8 +31,8 @@ public class Application extends JFrame {
                 break;
         }
 
-        int application_width = FRAME_WIDTH + 2 * border_width;
-        int application_height = FRAME_HEIGHT + bar_height + border_width;
+        // int application_width = FRAME_WIDTH + 2 * border_width;
+        // int application_height = FRAME_HEIGHT + bar_height + border_width;
         this.setTitle(title);
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
