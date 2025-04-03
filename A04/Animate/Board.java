@@ -47,7 +47,7 @@ public class Board extends JPanel implements KeyListener {
        transform.rotate(Math.toRadians(22.5), x_t, y_t);
 
        //draw out the shape
-        rect = new Rectangle(0, 0, SIDE_LEN, SIDE_LEN);
+        rect rect = new Rectangle(0, 0, SIDE_LEN, SIDE_LEN);
        Shape transofromedSquare = transform.createTransformedShape(rect);
        g2d.setColor(Color.MAGENTA);
        g2d.fill(transofromedSquare);

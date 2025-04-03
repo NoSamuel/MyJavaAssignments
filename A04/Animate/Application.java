@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 public class Application extends JFrame {
     private final int FRAME_WIDTH = 640;
     private final int FRAME_HEIGHT = 480;
-
+    
     /*
      * Constructor.
      */

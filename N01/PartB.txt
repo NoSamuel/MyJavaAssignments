@@ -1,0 +1,3 @@
+The gamer information (player tag, character selection, weapons) is passed to the game server through WLAN/Ethernet (Probably ethernet since it has less packet loss)
+Multiple IP address will be connected to the server (IPv6 or IPv4) are conneceted to the same game server, depending on how many players there are
+The match info is updated via UCP, which is faster and is good for games because it reduces latency, but there is not the confirmation layer that TCP has.

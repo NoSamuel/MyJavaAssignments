@@ -1,0 +1,4 @@
+The Email is sent via WLAN/ethernet
+The server aquires the IP address of the reciever of the email (either IPv4 or IPv6) in the network to decide where the email is headed
+The Email is then transported through TCP, which is slower than UDP but allows the reciever to confirm that the Email has been recieved
+The reciever then uses a protocal (HTTP) to decrypt the Email
