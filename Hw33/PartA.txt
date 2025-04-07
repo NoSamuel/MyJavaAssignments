@@ -1,0 +1,5 @@
+Question one:
+Statement a will encouter a compiling error because it attempts to creat an object of type Resizable, which is the name of the interface. This is not allowed.
+
+Question two:
+Only Statement b will work. The object circle declared in the declaration is of type Resizable, which means that it can only respond to methods within the resizable interface. All the other options are trying to invoke methods in the class itself but not under resizable, thus they will all encounter compliling errors.
