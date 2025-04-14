@@ -1,72 +1,108 @@
 package Animate;
 
-import javax.swing.JPanel;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import sound.SoundClip;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.JobAttributes.SidesType;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.geom.AffineTransform;
 import java.awt.Graphics2D;
-import java.awt.Shape;
 
-public class Board extends JPanel implements KeyListener {
-    private final int B_WIDTH = 400;
-    private final int B_HEIGHT = 400;
-    
-    //constructor
+import javax.swing.JPanel;
+
+public class Board extends JPanel implements KeyListener, MouseListener {
+    private final int B_WIDTH = 720;
+    private final int B_HEIGHT = 720;
+    private final int SIDE_LENGTH = 20;
+
+    //initialize variables of coordinates of the ball
+    private int x = B_WIDTH / 2 - SIDE_LENGTH / 2;
+    private int y = B_HEIGHT / 2 - SIDE_LENGTH / 2;
+
+    private void playBlip() {
+        try {
+            String path = "Media/blip.wav";
+            SoundClip blip = new SoundClip(path);
+            blip.open();
+            blip.play();
+        } catch (Exception e) {
+            System.err.println("Failed to locate/open blip sound file");
+        }
+    }
+
+    private void playBlop() {
+        try {
+            String path = "Media/blop.wav";
+            SoundClip blop = new SoundClip(path);
+            blop.open();
+            blop.play();
+        } catch (Exception e) {
+            System.err.println("Failed to locate/open blop sound file");
+        }
+    }
+
+    //initialize board that reponds to the event listener interface
     public Board() {
         setBackground(Color.CYAN);
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
+    }
+
+    //initialize paint component to draw ball
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.MAGENTA);
+        g2d.fillOval(x, y, SIDE_LENGTH, SIDE_LENGTH);
+        
+        //add listeners
         this.setFocusable(true);
         this.addKeyListener(this);
-
+        this.addMouseListener(this);
     }
 
-    
-    private final int SIDE_LEN = 150;
-    public void paintComponent(Graphics g) {
-       // call the parent class method.
-       super.paintComponent(g);
-
-       // cast our Graphics object to a Graphics2D object.
-       Graphics2D g2d = (Graphics2D) g;
-
-       // set color.
-
-       // draw a shape.
-
-       int x_t = B_WIDTH / 2;
-       int y_t = B_HEIGHT / 2;
-       x_t = x_t - SIDE_LEN / 2;
-       y_t = y_t - SIDE_LEN / 2;
-       AffineTransform transform = new AffineTransform();
-       transform.translate(x_t, y_t);
-       transform.rotate(Math.toRadians(22.5), x_t, y_t);
-
-       //draw out the shape
-        rect rect = new Rectangle(0, 0, SIDE_LEN, SIDE_LEN);
-        Shape transofromedSquare = transform.createTransformedShape(rect);
-        g2d.setColor(Color.MAGENTA);
-        g2d.fill(transofromedSquare);
-        g2d.drawString("I love the Derryfield School!", 20, 20);
-     }
-    @Override
-    public void keyTyped(KeyEvent e) {
-        System.out.println(e.getKeyChar());
-        // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
+    //methods to repaint the ball according to the input from user
+    public void mousePressed(MouseEvent e) {
+        x = e.getX() - SIDE_LENGTH / 2;
+        y = e.getY() - SIDE_LENGTH / 2;
+        playBlip();
+        repaint();
     }
-    @Override
+
     public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
+        if (e.getKeyCode() == 32) {
+        x = B_WIDTH / 2 - SIDE_LENGTH / 2;
+        y = B_HEIGHT / 2 - SIDE_LENGTH / 2;
+        playBlop();
+        repaint();
+        }
     }
-    @Override
+    
+    
+
+
+    public void mouseClicked(java.awt.event.MouseEvent e) {
+        
+    }
+    
+    public void mouseReleased(java.awt.event.MouseEvent e) {
+        
+    }
+
+    public void mouseEntered(java.awt.event.MouseEvent e) {
+        
+    }
+    
+    public void mouseExited(java.awt.event.MouseEvent e) {
+        
+    }
+
+    public void keyTyped(KeyEvent e) {
+
+    }
+    
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
+
     }
 }

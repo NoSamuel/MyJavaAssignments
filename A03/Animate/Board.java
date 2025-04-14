@@ -2,6 +2,9 @@ package Animate;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
+import sound.SoundClip;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -10,11 +13,17 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 public class Board extends JPanel {
+
+    Random generator = new Random();
+    private int gen_x = generator.nextInt(1, 6);
+    private int gen_y = generator.nextInt(1, 6);
     private final int B_WIDTH = 720;
     private final int B_HEIGHT = 720;
 
@@ -22,11 +31,17 @@ public class Board extends JPanel {
     private int y = 0;
 
     private Timer timer;
-    private final int INITIAL_DELAY = 25;
+    private final int INITIAL_DELAY = 50;
     private final int PERIOD_INTERVAL = 25;
-    private int xSpeed = 2;
-    private int ySpeed = 2;
+    private final int ORIGINAL_SPEEDx = gen_x;
+    private final int ORIGINAL_SPEEDy = gen_y;
+
+    private int xSpeed = 4;
+    private int ySpeed = 4;
     private int angle = 0;
+
+    
+
 
     private class ScheduledUpdate extends TimerTask {
        /*
@@ -34,26 +49,31 @@ public class Board extends JPanel {
         * Update the position of our ball here.
         */
 
-        //make sure that the image does not travel out of bonds
+       //make sure that the image does not travel out of bonds
+        
+
         public void run() {
+            try{
+                String path = "media/ow.wav";
+                SoundClip ow = new SoundClip(path);
+
             x += xSpeed;
             y += ySpeed;
             angle += 3;
+            ow.open();
 
-            if (x > B_WIDTH) {
-                xSpeed = -xSpeed;
-            }
-            
-            if (y > B_HEIGHT) {
-                ySpeed = -ySpeed;
-            }
-
-            if (x < B_WIDTH) {
-                xSpeed = -xSpeed;
-            }
-            
-            if (y < B_HEIGHT) {
-                ySpeed = -ySpeed;
+            if (x > 720) {
+                xSpeed = -ORIGINAL_SPEEDx;
+                ow.play();
+            } else if (y > 720) {
+                ySpeed = -ORIGINAL_SPEEDy;
+                ow.play();
+            } else if (x < 0) {
+                xSpeed = ORIGINAL_SPEEDx;
+                ow.play();
+            } else if (y < 0) {
+                ySpeed = ORIGINAL_SPEEDy;
+                ow.play();
             }
 
             //reset angle
@@ -61,6 +81,10 @@ public class Board extends JPanel {
                 angle = 0;
             }
             repaint();
+        } catch (Exception e) {
+                System.err.println("Failed to open audio file");
+            }
+            
         }
     }
 
