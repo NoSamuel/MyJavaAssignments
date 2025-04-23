@@ -47,7 +47,7 @@ public class Cannon {
         this.x = 60 - X_PIVOT;
         this.y = 900 - 60 - Y_PIVOT;
         this.angle = -45;
-        this.v_initial = 20;
+        this.v_initial = 37;
     }
 
     
@@ -116,22 +116,26 @@ public class Cannon {
     //Methods to rotate the cannon
     public void rotateClockwise() {
         playWheelSound();
-        angle = angle + 10;
+        for (int i = 0; i < 30; i++) {
+            angle = angle + 0.167;
         if (angle < MAX_ANGLE) {
             angle = MAX_ANGLE;
         } else if (angle > MIN_ANGLE) {
             angle = MIN_ANGLE;
         }
+        }
     }
 
     public void rotateCounterClockwise() {
         playWheelSound();
-        angle = angle - 10;
+        for (int i = 0; i < 30; i++) {
+            angle = angle - 0.167;
         if (angle > MIN_ANGLE) {
             angle = MIN_ANGLE;
         } else if (angle < MAX_ANGLE) {
             angle = MAX_ANGLE;
         }
+        } 
     }
     
     //method to fire
@@ -148,7 +152,7 @@ public class Cannon {
 
         // draw the cannon
         g2d.drawImage(Cannon, transform, null);
-        
+
         //draw the pink base
         g2d.setColor(Color.BLACK);
         g2d.drawPolygon(new int[] { 40, 60, 80 }, new int[] { B_HEIGHT - 20, B_HEIGHT - 60, B_HEIGHT - 20 }, 3);
@@ -158,5 +162,17 @@ public class Cannon {
         //draw the blue circle
         g2d.setColor(Color.BLUE);
         g2d.fillOval(60 - (10 / 2), B_HEIGHT - 60 - (10 / 2), 10, 10);
+    }
+    
+    //method to fire the cannon
+    public void fireCannonBall(Cannonball cannonball) {
+
+        //play sound effect
+        if (cannonball.getState() == Cannonball.STATE.IDLE) {
+            playCannonSound();
+        }
+
+        //fire the ball
+        cannonball.launch((x + X_PIVOT) + (100 * Math.cos(Math.toRadians(angle))) - (15/2), (y + Y_PIVOT) + (100 * Math.sin(Math.toRadians(angle))) - (15/2), Math.cos(Math.toRadians(angle) * v_initial), Math.sin(Math.toRadians(angle) * v_initial) );
     }
 }

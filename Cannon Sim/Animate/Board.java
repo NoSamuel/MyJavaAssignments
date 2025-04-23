@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -22,9 +23,17 @@ public class Board extends JPanel implements KeyListener {
     private static final int B_WIDTH = 1600;
     private static final int B_HEIGHT = 900;
     private final int FLOOR = B_HEIGHT - 25;
+    private final int G_BOARD = 1;
+    private final int BORAD_SCALE = 256;
 
-    //declare cannon object
+    //declare cannon and the Cannon ball object
     Cannon cannon = new Cannon();
+    Cannonball cannonball = new Cannonball(0, G_BOARD, FLOOR);
+
+    //utility timer to track and update the cannonball
+    Timer timer;
+    private final int DELAY = 100;
+    private final int INTERVAL = 20;
 
     //constructor
     public Board() {
@@ -33,6 +42,9 @@ public class Board extends JPanel implements KeyListener {
 
         this.setFocusable(true);
         this.addKeyListener(this);
+
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new cannonBallUpdate(), DELAY, INTERVAL);
     }
 
     public void paintComponent(Graphics g) {
@@ -49,6 +61,14 @@ public class Board extends JPanel implements KeyListener {
 
         //draw cannon
         cannon.drawCannon(g2d);
+
+        //display information
+        Graphics text = (Graphics2D) g;
+        text.setColor(Color.BLACK);
+        text.setFont(new Font("Georgia", Font.PLAIN, 18));
+        text.drawString("Press left/right arrow key to adjust cannon angle", 50, 50);
+        text.drawString("Press space to fire cannon", 50, 75);
+        text.drawString("Current angle " + cannon.getAngle() + " degrees", 50, 100);
     }
 
     //declare methods under the KeyListener class
@@ -56,7 +76,7 @@ public class Board extends JPanel implements KeyListener {
         if (e.getKeyCode() == 32) {
             System.out.println("The spacebar was pressed");
             //call upon fire method
-            cannon.fire();
+            cannon.fireCannonBall(cannonball);
         } else if (e.getKeyCode() == 37) {
             System.out.println("The left arrow key was pressed");
             //call upon rotatecounterclockwise method
@@ -80,5 +100,13 @@ public class Board extends JPanel implements KeyListener {
 
     public void keyTyped(KeyEvent e) {
         //no need to declare anything
+    }
+
+    //method to update the ball
+    public class cannonBallUpdate extends TimerTask {
+        public void run() {
+            cannonball.updateBall();
+            repaint();
+        }
     }
 }
