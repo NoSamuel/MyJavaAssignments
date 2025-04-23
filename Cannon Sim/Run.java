@@ -1,7 +1,7 @@
 import Animate.Application;
 import java.awt.EventQueue;
 
-public class PartA {
+public class Run {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             Application myApp = new Application("Title");

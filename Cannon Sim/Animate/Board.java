@@ -23,7 +23,10 @@ public class Board extends JPanel implements KeyListener {
     private static final int B_HEIGHT = 900;
     private final int FLOOR = B_HEIGHT - 25;
 
-    //declare our board object and implment the keylistener interface
+    //declare cannon object
+    Cannon cannon = new Cannon();
+
+    //constructor
     public Board() {
         setBackground(Color.CYAN);
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
@@ -32,26 +35,38 @@ public class Board extends JPanel implements KeyListener {
         this.addKeyListener(this);
     }
 
-    public void paintComponent(Graphics g2d) {
-        super.paintComponent(g2d);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
 
         //draw our virtual ground
-        g2d.setColor(Color.GREEN);
-        g2d.fillRect(0, FLOOR, B_WIDTH, B_HEIGHT - FLOOR);
+        g.setColor(Color.GREEN);
+        g.fillRect(0, FLOOR, B_WIDTH, B_HEIGHT - FLOOR);
 
         //draw the horizontal black line on the ground
-        g2d.setColor(Color.BLACK);
-        g2d.drawLine(0, FLOOR, B_WIDTH, FLOOR);
+        g.setColor(Color.BLACK);
+        g.drawLine(0, FLOOR, B_WIDTH, FLOOR);
+
+        //draw cannon
+        cannon.drawCannon(g2d);
     }
 
     //declare methods under the KeyListener class
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == 32) {
             System.out.println("The spacebar was pressed");
+            //call upon fire method
+            cannon.fire();
         } else if (e.getKeyCode() == 37) {
             System.out.println("The left arrow key was pressed");
+            //call upon rotatecounterclockwise method
+            cannon.rotateCounterClockwise();
+            repaint();
         } else if (e.getKeyCode() == 39) {
             System.out.println("The right arrow key was pressed");
+            //call upon rotataclockwise method
+            cannon.rotateClockwise();
+            repaint();
         } else if (e.getKeyCode() == 38) {
             System.out.println("The up arrow key was pressed");
         } else if (e.getKeyCode() == 40) {
