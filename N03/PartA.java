@@ -12,5 +12,22 @@ public class PartA {
         while (true) {
             System.out.print
         }
+        String filepath = "data.bin";
+        try (
+                FileOutputStream fileOutputStream = new FileOutputStream(filepath);
+                DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream)) {
+            // save the last ID used info.
+            dataOutputStream.writeInt(Employee.lastIDUsed);
+            for (Employee e : employees) {
+                e.writeToStream(dataOutputStream);
+            }
+
+            // we're done. the streams should automatically be closed as we exit the try
+            // with resources clause.
+            System.out.println("Data saved to \"" + filepath + "\"");
+        } catch (IOException e) {
+            System.err.println("Error writing to output file.");
+            System.err.println(e.getMessage());
+        }
     }
 }
