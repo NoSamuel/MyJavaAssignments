@@ -69,8 +69,8 @@ public class Board extends JPanel implements KeyListener {
         text.setFont(new Font("Georgia", Font.PLAIN, 18));
         text.drawString("Press left/right arrow key to adjust cannon angle", 50, 50);
         text.drawString("Press space to fire cannon", 50, 75);
-        text.drawString("Current angle " + -1 * cannon.getAngle() + " degrees", 50, 100);
-        text.drawString("Current time: " + cannonball.getTimeScale(), 50, 125);
+        text.drawString("Current angle " + String.format("%.2f", -1 * cannon.getAngle()) + " degrees", 50, 100);
+        text.drawString("Current time: " + String.format("%.2f", cannonball.getTimeScale()) + "s", 50, 125);
     }
 
     //declare methods under the KeyListener class

@@ -8,6 +8,9 @@ import java.io.File;
 import java.nio.Buffer;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
+
+import sound.SoundClip;
 
 public class Cannonball {
     //initialize varibles
@@ -27,6 +30,10 @@ public class Cannonball {
     private int frameDelay = 5;
     private int frameCounter = 0;
     private boolean loadedFrame = false;
+
+    boolean explosionPlayed = false;
+
+    private Clip burningSoundClip = null;
 
     //enumeration of the cannon state
     public enum STATE {
@@ -56,14 +63,46 @@ public class Cannonball {
     private BufferedImage loadImage(String path) {
         // loads a buffered image (for the flame animation).
         BufferedImage img = null;
-        try{
+        try {
             img = ImageIO.read(new File(path));
         } catch (Exception e) {
             System.err.println("falled to load one or more flame image(s)");
         }
         return img;
     }
+    
+    //methods to play explosion sound
+    public void playExplosionSound() {
+        try {
+            String path = "Media/Explosion.wav";
+            SoundClip explosionSound = new SoundClip(path);
+            explosionSound.open();
+            explosionSound.play();
+        } catch (Exception e) {
+            System.err.println("Failed to open sound file: Explosion.wav");
+        }
+    }
 
+    public void playFireSound() {
+        try {
+            String path = "Media/fireburning.wav";
+            SoundClip burningSound = new SoundClip(path);
+            burningSound.open();
+            burningSound.play();
+
+            burningSoundClip = burningSound.getClip();
+        } catch (Exception e) {
+            System.err.println("Failed to open sound file: Explosion.wav");
+        }
+    }
+
+    public void stopBurningSound() {
+        if (burningSoundClip != null && burningSoundClip.isRunning()) {
+        burningSoundClip.stop();
+        burningSoundClip.close();
+        burningSoundClip = null;
+    }
+    }
     /*
      * The draw method is called by the Board object
      * and is used to paint the current location and state of the ball.
@@ -83,7 +122,7 @@ public class Cannonball {
             }
 
             AffineTransform transform = new AffineTransform();
-            transform.translate(x, y - 37);
+            transform.translate(x, y - 34);
             g2d.drawImage(flameFrames[currentFrame], transform, null);
         }
     }
@@ -104,11 +143,19 @@ public class Cannonball {
             v_y = v_y + a_y;
             x = x + v_x;
             y = y + v_y;
+
+            timeElapsed = timeElapsed + 0.02;
         }
 
         //detect if the ball hits the ground
         if (y >= ground) {
+            y = ground;
             state = STATE.EXPLODING;
+            while (explosionPlayed == false) {
+                playExplosionSound();
+                playFireSound();
+                explosionPlayed = true;
+            }
         }
 
         if (state == STATE.EXPLODING) {
@@ -128,10 +175,13 @@ public class Cannonball {
     public void launch(double x, double y, double vx, double vy) {
         if (state != STATE.FLYING) {
             state = STATE.FLYING;
+            stopBurningSound();
             this.x = x;
             this.y = y;
             this.v_x = vx;
             this.v_y = vy;
+            this.timeElapsed = 0;
+            explosionPlayed = false;
         }
     }
 

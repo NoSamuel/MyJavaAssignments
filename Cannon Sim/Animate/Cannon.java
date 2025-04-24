@@ -47,7 +47,7 @@ public class Cannon {
         this.x = 60 - X_PIVOT;
         this.y = 900 - 60 - Y_PIVOT;
         this.angle = -45;
-        this.v_initial = 37;
+        this.v_initial = 33; //I picked this number so that the cannon ball never leaves my screen (could be different depending on the aspect ratio of your scree)
     }
 
     
