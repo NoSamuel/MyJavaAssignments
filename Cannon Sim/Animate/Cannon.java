@@ -138,12 +138,6 @@ public class Cannon {
         } 
     }
     
-    //method to fire
-    public void fire() {
-        playCannonSound();
-        System.out.println("The cannon is fired");
-    }
-    
     //method to draw the cannon
     public void drawCannon(Graphics2D g2d) {
         AffineTransform transform = new AffineTransform();
@@ -166,13 +160,15 @@ public class Cannon {
     
     //method to fire the cannon
     public void fireCannonBall(Cannonball cannonball) {
+        System.out.println("The cannon is fired");
 
         //play sound effect
-        if (cannonball.getState() == Cannonball.STATE.IDLE) {
+        if (cannonball.getState() != Cannonball.STATE.FLYING) {
             playCannonSound();
         }
 
         //fire the ball
-        cannonball.launch((x + X_PIVOT) + (100 * Math.cos(Math.toRadians(angle))) - (15/2), (y + Y_PIVOT) + (100 * Math.sin(Math.toRadians(angle))) - (15/2), Math.cos(Math.toRadians(angle) * v_initial), Math.sin(Math.toRadians(angle) * v_initial) );
+        cannonball.launch((x + X_PIVOT) + (100 * Math.cos(Math.toRadians(angle))) - (20/2), (y + Y_PIVOT) + (100 * Math.sin(Math.toRadians(angle))) - (20/2), Math.cos(Math.toRadians(angle)) * v_initial, Math.sin(Math.toRadians(angle)) * v_initial);
     }
+
 }

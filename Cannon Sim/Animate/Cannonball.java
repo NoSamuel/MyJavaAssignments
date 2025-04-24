@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.nio.Buffer;
 
 import javax.imageio.ImageIO;
 
@@ -20,6 +21,13 @@ public class Cannonball {
     private double ground;
     private STATE state = STATE.IDLE;
 
+    //variables for the flame animation
+    private BufferedImage[] flameFrames = new BufferedImage[4];
+    private int currentFrame = 0;
+    private int frameDelay = 5;
+    private int frameCounter = 0;
+    private boolean loadedFrame = false;
+
     //enumeration of the cannon state
     public enum STATE {
         IDLE,
@@ -27,7 +35,7 @@ public class Cannonball {
         EXPLODING
     }
 
-     public Cannonball(double ax, double ay, double ground) {
+    public Cannonball(double ax, double ay, double ground) {
         // public constructor for CannonBall class.
         // takes the acceleration rates (x and y) and the location of the ground (as a
         // double)
@@ -35,6 +43,14 @@ public class Cannonball {
         this.a_x = ax;
         this.a_y = ay;
         this.ground = ground;
+    }
+    
+    //methods to load flame frames
+    private void loadFlameFrames() {
+        for (int i = 0; i < 4; i++) {
+            flameFrames[i] = loadImage("Media/flame0" + (i + 1) + ".png");
+        }
+        loadedFrame = true;
     }
 
     private BufferedImage loadImage(String path) {
@@ -61,19 +77,14 @@ public class Cannonball {
         if (state == STATE.FLYING) {
             g2d.setColor(Color.RED);
             g2d.fillOval((int) x, (int) y, 15, 15);
-        }
-
-        //when the ball explodes
-        if (state == STATE.EXPLODING) {
-            //use an array to include all four frames of the flame
-            BufferedImage[] flameFrames;
-            flameFrames = new BufferedImage[4];
-            for (int i = 0; i < 4; i++) {
-                flameFrames[i] = loadImage("Media/flame0" + (i + 1) + ".png");
-                AffineTransform transform = new AffineTransform();
-                transform.translate(x, y - 35);
-                g2d.drawImage(flameFrames[i], transform, null);
+        } else if (state == STATE.EXPLODING) { //after the ball explodes
+            if (loadedFrame != true) {
+                loadFlameFrames();
             }
+
+            AffineTransform transform = new AffineTransform();
+            transform.translate(x, y - 37);
+            g2d.drawImage(flameFrames[currentFrame], transform, null);
         }
     }
 
@@ -99,6 +110,14 @@ public class Cannonball {
         if (y >= ground) {
             state = STATE.EXPLODING;
         }
+
+        if (state == STATE.EXPLODING) {
+            frameCounter = frameCounter + 1;
+            if (frameCounter >= frameDelay) {
+                frameCounter = 0;
+                currentFrame = (currentFrame + 1) % 4;
+            }
+        }
     }
 
     /*
@@ -107,7 +126,7 @@ public class Cannonball {
      * with the inital velocity of (vx, vy).
      */
     public void launch(double x, double y, double vx, double vy) {
-        if (state == STATE.IDLE) {
+        if (state != STATE.FLYING) {
             state = STATE.FLYING;
             this.x = x;
             this.y = y;

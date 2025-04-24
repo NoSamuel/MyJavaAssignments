@@ -27,8 +27,8 @@ public class Board extends JPanel implements KeyListener {
     private final int BORAD_SCALE = 256;
 
     //declare cannon and the Cannon ball object
-    Cannon cannon = new Cannon();
-    Cannonball cannonball = new Cannonball(0, G_BOARD, FLOOR);
+    private Cannon cannon = new Cannon();
+    private Cannonball cannonball = new Cannonball(0, G_BOARD, FLOOR);
 
     //utility timer to track and update the cannonball
     Timer timer;
@@ -61,6 +61,7 @@ public class Board extends JPanel implements KeyListener {
 
         //draw cannon
         cannon.drawCannon(g2d);
+        cannonball.draw(g2d);
 
         //display information
         Graphics text = (Graphics2D) g;
@@ -68,7 +69,8 @@ public class Board extends JPanel implements KeyListener {
         text.setFont(new Font("Georgia", Font.PLAIN, 18));
         text.drawString("Press left/right arrow key to adjust cannon angle", 50, 50);
         text.drawString("Press space to fire cannon", 50, 75);
-        text.drawString("Current angle " + cannon.getAngle() + " degrees", 50, 100);
+        text.drawString("Current angle " + -1 * cannon.getAngle() + " degrees", 50, 100);
+        text.drawString("Current time: " + cannonball.getTimeScale(), 50, 125);
     }
 
     //declare methods under the KeyListener class
