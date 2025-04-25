@@ -1,18 +1,13 @@
 package Animate;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
-import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,7 +19,6 @@ public class Board extends JPanel implements KeyListener {
     private static final int B_HEIGHT = 900;
     private final int FLOOR = B_HEIGHT - 25;
     private final int G_BOARD = 1;
-    private final int BORAD_SCALE = 256;
 
     //declare cannon and the Cannon ball object
     private Cannon cannon = new Cannon();

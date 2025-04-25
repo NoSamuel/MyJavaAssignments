@@ -12,9 +12,7 @@ import sound.SoundClip;
 public class Cannon {
 
     //initialize variables
-    private static final int B_WIDTH = 1600;
     private static final int B_HEIGHT = 900;
-    private final int FLOOR = B_HEIGHT - 25;
     
     //initialize the position and direction values of the cannon
     private double x;

@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.nio.Buffer;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
