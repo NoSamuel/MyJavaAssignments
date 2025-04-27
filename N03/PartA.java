@@ -2,16 +2,48 @@ import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
 public class PartA {
     public static void main(String[] args) {
+        String lastName;
+        String firstName;
+        double salary;
         Scanner in = new Scanner(System.in);
         ArrayList<Employee> employees = new ArrayList<Employee>();
         while (true) {
-            System.out.print
+            System.out.print("Type e to add an employee or q to quit");
+            String input = in.nextLine().toLowerCase();
+            if (input.equals("q")){
+                break;
+            } else {
+                System.out.println("Enter the last name of your employee: ");
+                lastName = in.nextLine();
+                System.out.print("First Name: ");
+                firstName = in.nextLine();
+                System.out.print("Salary: ");
+                salary = 0;
+            }
+            try {
+                    input = in.nextLine();
+                    salary = Double.parseDouble(input);
+                } catch (InputMismatchException e) {
+                    System.err.println("Error parsing salary.");
+                    System.err.println("Using $0 as defauly salary.");
+                }
+                System.out.println();
+                Employee.lastIDUsed++;
+                Employee e = new Employee(lastName, firstName, Employee.lastIDUsed, salary);
+                employees.add(e);
+            }
+
+        //method to display information
+        for (int i = 0; i < employees.size(); i++){
+            System.out.println(employees.get(i).getFirstName());
         }
+
         String filepath = "data.bin";
         try (
                 FileOutputStream fileOutputStream = new FileOutputStream(filepath);
@@ -29,5 +61,6 @@ public class PartA {
             System.err.println("Error writing to output file.");
             System.err.println(e.getMessage());
         }
+        in.close();
     }
 }
